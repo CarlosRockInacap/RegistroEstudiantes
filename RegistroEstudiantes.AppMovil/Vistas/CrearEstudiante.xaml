@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RegistroEstudiantes.AppMovil.Vistas.CrearEstudiante"
+             Title="Crear Estudiante">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <!-- Picker para seleccionar curso -->
+            <Frame CornerRadius="10"
+                   BorderColor="LightGray"
+                   HasShadow="True"
+                   Padding="10">
+                <Picker Title="Seleccionar Curso"
+                        ItemsSource="{Binding Cursos}"
+                        ItemDisplayBinding="{Binding Nombre}"
+                        x:Name="cursoPicker" />
+            </Frame>
+
+            <!-- Campos de texto -->
+            <Frame CornerRadius="10"
+                   BorderColor="LightGray"
+                   HasShadow="True"
+                   Padding="10">
+                <Entry Placeholder="Primer Nombre"
+                       x:Name="primerNombreEntry" />
+            </Frame>
+            <Frame CornerRadius="10"
+                   BorderColor="LightGray"
+                   HasShadow="True"
+                   Padding="10">
+                <Entry Placeholder="Segundo Nombre"
+                       x:Name="segundoNombreEntry" />
+            </Frame>
+            <Frame CornerRadius="10"
+                   BorderColor="LightGray"
+                   HasShadow="True"
+                   Padding="10">
+                <Entry Placeholder="Primer Apellido"
+                       x:Name="primerApellidoEntry" />
+            </Frame>
+            <Frame CornerRadius="10"
+                   BorderColor="LightGray"
+                   HasShadow="True"
+                   Padding="10">
+                <Entry Placeholder="Segundo Apellido"
+                       x:Name="segundoApellidoEntry" />
+            </Frame>
+            <Frame CornerRadius="10"
+                   BorderColor="LightGray"
+                   HasShadow="True"
+                   Padding="10">
+                <Entry Placeholder="Correo Electrónico"
+                       x:Name="correoEntry" />
+            </Frame>
+            <Frame CornerRadius="10"
+                   BorderColor="LightGray"
+                   HasShadow="True"
+                   Padding="10">
+                <Entry Placeholder="Edad"
+                       x:Name="edadEntry"
+                       Keyboard="Numeric" />
+            </Frame>
+
+            <!-- Selector de fecha -->
+            <Frame CornerRadius="10"
+                   BorderColor="LightGray"
+                   HasShadow="True"
+                   Padding="10">
+                <DatePicker x:Name="fechaInicioPicker" />
+            </Frame>
+
+            <!-- Botón de guardar -->
+            <Button Text="Guardar"
+                    x:Name="guardarButton"
+                    FontSize="16"
+                    BackgroundColor="LightBlue"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    Clicked="guardarButton_Clicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

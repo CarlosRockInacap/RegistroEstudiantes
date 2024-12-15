@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RegistroEstudiantes.AppMovil.Vistas.ListarEstudiantes"
+             Title="Lista de Estudiantes">
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="10">
+            <!-- Barra de búsqueda y botón -->
+            <Grid RowSpacing="5" ColumnSpacing="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+
+                <SearchBar Placeholder="Buscar..."
+                           x:Name="filtroSearchBar"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           HorizontalOptions="FillAndExpand"
+                           TextChanged="filtroSearchBar_TextChanged" />
+                <Button Text="Nuevo&#x0a;Estudiante"
+                        x:Name="NuevoEstudianteBoton"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        FontSize="10"
+                        HorizontalOptions="Center"
+                        LineBreakMode="WordWrap"
+                        VerticalOptions="Center"
+                        WidthRequest="100"
+                        BackgroundColor="LightBlue"
+                        CornerRadius="10"
+                        Clicked="NuevoEstudianteBoton_Clicked" />
+            </Grid>
+
+            <!-- Lista de estudiantes -->
+            <CollectionView x:Name="ListaCollection"
+                            ItemsSource="{Binding Lista}"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="10"
+                               BorderColor="LightGray"
+                               Padding="10"
+                               Margin="0,5"
+                               HasShadow="True">
+                            <Grid ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Imagen del estudiante -->
+                                <Image Source="profile.jpg"
+                                       Aspect="AspectFill"
+                                       HeightRequest="60"
+                                       WidthRequest="60"
+                                       VerticalOptions="Center">
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30" />
+                                    </Image.Clip>
+                                </Image>
+
+                                <!-- Información del estudiante -->
+                                <VerticalStackLayout Grid.Column="1"
+                                                     VerticalOptions="Center">
+                                    <Label Text="{Binding NombreCompleto}"
+                                           FontAttributes="Bold"
+                                           FontSize="18"
+                                           LineBreakMode="TailTruncation" />
+                                    <Label Text="{Binding Curso.Nombre}"
+                                           FontSize="14"
+                                           TextColor="Gray"
+                                           LineBreakMode="TailTruncation" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
