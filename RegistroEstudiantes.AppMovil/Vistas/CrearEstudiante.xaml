@@ -3,81 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RegistroEstudiantes.AppMovil.Vistas.CrearEstudiante"
              Title="Crear Estudiante">
-    <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
-            <!-- Picker para seleccionar curso -->
-            <Frame CornerRadius="10"
-                   BorderColor="LightGray"
-                   HasShadow="True"
-                   Padding="10">
-                <Picker Title="Seleccionar Curso"
-                        ItemsSource="{Binding Cursos}"
-                        ItemDisplayBinding="{Binding Nombre}"
-                        x:Name="cursoPicker" />
-            </Frame>
-
-            <!-- Campos de texto -->
-            <Frame CornerRadius="10"
-                   BorderColor="LightGray"
-                   HasShadow="True"
-                   Padding="10">
-                <Entry Placeholder="Primer Nombre"
-                       x:Name="primerNombreEntry" />
-            </Frame>
-            <Frame CornerRadius="10"
-                   BorderColor="LightGray"
-                   HasShadow="True"
-                   Padding="10">
-                <Entry Placeholder="Segundo Nombre"
-                       x:Name="segundoNombreEntry" />
-            </Frame>
-            <Frame CornerRadius="10"
-                   BorderColor="LightGray"
-                   HasShadow="True"
-                   Padding="10">
-                <Entry Placeholder="Primer Apellido"
-                       x:Name="primerApellidoEntry" />
-            </Frame>
-            <Frame CornerRadius="10"
-                   BorderColor="LightGray"
-                   HasShadow="True"
-                   Padding="10">
-                <Entry Placeholder="Segundo Apellido"
-                       x:Name="segundoApellidoEntry" />
-            </Frame>
-            <Frame CornerRadius="10"
-                   BorderColor="LightGray"
-                   HasShadow="True"
-                   Padding="10">
-                <Entry Placeholder="Correo Electrónico"
-                       x:Name="correoEntry" />
-            </Frame>
-            <Frame CornerRadius="10"
-                   BorderColor="LightGray"
-                   HasShadow="True"
-                   Padding="10">
-                <Entry Placeholder="Edad"
-                       x:Name="edadEntry"
-                       Keyboard="Numeric" />
-            </Frame>
-
-            <!-- Selector de fecha -->
-            <Frame CornerRadius="10"
-                   BorderColor="LightGray"
-                   HasShadow="True"
-                   Padding="10">
-                <DatePicker x:Name="fechaInicioPicker" />
-            </Frame>
-
-            <!-- Botón de guardar -->
-            <Button Text="Guardar"
-                    x:Name="guardarButton"
-                    FontSize="16"
-                    BackgroundColor="LightBlue"
-                    TextColor="White"
-                    CornerRadius="10"
-                    HeightRequest="50"
-                    Clicked="guardarButton_Clicked" />
-        </VerticalStackLayout>
-    </ScrollView>
+    <VerticalStackLayout Padding="10" Spacing="10">
+        <Picker Title="Seleccionar Curso"
+                ItemsSource="{Binding Cursos}"
+                ItemDisplayBinding="{Binding Nombre}"
+                x:Name="cursoPicker" />
+        <Entry Placeholder="Primer Nombre"
+               x:Name="primerNombreEntry" />
+        <Entry Placeholder="Segundo Nombre"
+               x:Name="segundoNombreEntry" />
+        <Entry Placeholder="Primer Apellido"
+               x:Name="primerApellidoEntry" />
+        <Entry Placeholder="Segundo Apellido"
+               x:Name="segundoApellidoEntry" />
+        <Entry Placeholder="Correo Electrónico"
+               x:Name="correoEntry" />
+        <Entry Placeholder="Edad"
+               x:Name="edadEntry"
+               Keyboard="Numeric" />
+        <DatePicker x:Name="fechaInicioPicker" />
+        <Button Text="Guardar"
+                x:Name="guardarButton"                    
+                Clicked="guardarButton_Clicked" />
+    </VerticalStackLayout>
 </ContentPage>

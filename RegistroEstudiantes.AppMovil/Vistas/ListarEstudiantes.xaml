@@ -4,82 +4,78 @@
              x:Class="RegistroEstudiantes.AppMovil.Vistas.ListarEstudiantes"
              Title="Lista de Estudiantes">
     <ScrollView>
-        <VerticalStackLayout Padding="10" Spacing="10">
-            <!-- Barra de búsqueda y botón -->
-            <Grid RowSpacing="5" ColumnSpacing="5">
+            <Grid Padding="10" RowSpacing="10" ColumnSpacing="5">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
 
                 <SearchBar Placeholder="Buscar..."
-                           x:Name="filtroSearchBar"
-                           Grid.Row="0"
-                           Grid.Column="0"
-                           HorizontalOptions="FillAndExpand"
-                           TextChanged="filtroSearchBar_TextChanged" />
-                <Button Text="Nuevo&#x0a;Estudiante"
-                        x:Name="NuevoEstudianteBoton"
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        FontSize="10"
-                        HorizontalOptions="Center"
-                        LineBreakMode="WordWrap"
-                        VerticalOptions="Center"
-                        WidthRequest="100"
-                        BackgroundColor="LightBlue"
-                        CornerRadius="10"
-                        Clicked="NuevoEstudianteBoton_Clicked" />
-            </Grid>
+                       x:Name="filtroSearchBar"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       TextChanged="filtroSearchBar_TextChanged"/>
+                <Button Text="Nuevo Estudiante"
+                    x:Name="NuevoEstudianteBoton"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Clicked="NuevoEstudianteBoton_Clicked"/>
 
-            <!-- Lista de estudiantes -->
-            <CollectionView x:Name="ListaCollection"
+                <CollectionView x:Name="listaCollection"
                             ItemsSource="{Binding Lista}"
-                            SelectionMode="None">
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame CornerRadius="10"
-                               BorderColor="LightGray"
-                               Padding="10"
-                               Margin="0,5"
-                               HasShadow="True">
-                            <Grid ColumnSpacing="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Imagen del estudiante -->
-                                <Image Source="profile.jpg"
-                                       Aspect="AspectFill"
-                                       HeightRequest="60"
-                                       WidthRequest="60"
-                                       VerticalOptions="Center">
-                                    <Image.Clip>
-                                        <EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30" />
-                                    </Image.Clip>
-                                </Image>
-
-                                <!-- Información del estudiante -->
-                                <VerticalStackLayout Grid.Column="1"
-                                                     VerticalOptions="Center">
-                                    <Label Text="{Binding NombreCompleto}"
-                                           FontAttributes="Bold"
-                                           FontSize="18"
-                                           LineBreakMode="TailTruncation" />
-                                    <Label Text="{Binding Curso.Nombre}"
-                                           FontSize="14"
-                                           TextColor="Gray"
-                                           LineBreakMode="TailTruncation" />
-                                </VerticalStackLayout>
-                            </Grid>
-                        </Frame>
+                        <Grid ColumnSpacing="10" Padding="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.RowSpan="2"
+                                   Source="profile.jpg"
+                                   Aspect="AspectFill"
+                                   HeightRequest="60"
+                                   WidthRequest="60"/>
+                            <Label Grid.Column="1"
+                                   Grid.Row="0"
+                                   Text="{Binding NombreCompleto}"
+                                   FontAttributes="Bold"
+                                   FontSize="20"/>
+                            <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   Text="{Binding Curso.Nombre}"/>
+                            <ImageButton x:Name="editarButton"
+                                         Grid.Column="2"
+                                         Source="edit_icon.png"
+                                         BackgroundColor="Transparent"
+                                         HeightRequest="25"
+                                         WidthRequest="25"
+                                         CommandParameter="{Binding .}"
+                                         Clicked="editarButton_Clicked"/>
+                            <ImageButton x:Name="deshabilitarButton"
+                                         Grid.Column="3"
+                                         Grid.RowSpan="1"
+                                         Source="disable.png"
+                                         BackgroundColor="Transparent"
+                                         HeightRequest="25"
+                                         WidthRequest="25"
+                                         CommandParameter="{Binding .}"
+                                         Clicked="deshabilitarButton_Clicked"/>
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </VerticalStackLayout>
-    </ScrollView>
-</ContentPage>
+            </Grid>
+        </ScrollView>
+    </ContentPage>

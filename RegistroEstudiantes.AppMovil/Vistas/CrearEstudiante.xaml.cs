@@ -14,6 +14,7 @@ public partial class CrearEstudiante : ContentPage
         InitializeComponent();
         ListarCursos();
         BindingContext = this;
+              
     }
 
     private void ListarCursos()
@@ -35,7 +36,8 @@ public partial class CrearEstudiante : ContentPage
             CorreoElectronico = correoEntry.Text,
             FechaInicio = fechaInicioPicker.Date,
             Edad = int.Parse(edadEntry.Text),
-            Curso = curso
+            Curso = curso,
+            Estado = true
         };
 
         try

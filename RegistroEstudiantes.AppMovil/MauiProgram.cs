@@ -21,31 +21,62 @@ namespace RegistroEstudiantes.AppMovil
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-            Registrar();
+            ActualizarCursos();
+            ActualizarEstudiantes();
             return builder.Build();
         }
 
-        public static void Registrar()
+        public static async Task ActualizarCursos()
         {
             FirebaseClient client = new FirebaseClient("https://registroestudiantes-5df1f-default-rtdb.firebaseio.com/");
+            var cursos = await client.Child("Cursos").OnceAsync<Curso>();
 
-            var cursos = client.Child("Cursos").OnceAsync<Curso>();
-
-            if (cursos.Result.Count == 0) 
+            if (cursos.Count == 0)
             {
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "1ro Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "2do Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "3ro Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "4to Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "5to Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "6to Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "7mo Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "8vo Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "1ro Medio" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "2do Medio" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "3ro Medio" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "4to Medio" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "1ro Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "2do Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "3ro Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "4to Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "5to Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "6to Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "7mo Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "8vo Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "1ro Medio" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "2do Medio" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "3ro Medio" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "4to Medio" });
+            }
+
+            else
+            {
+                foreach (var curso in cursos)
+                {
+                    if (curso.Object.Estado == null)
+                    {
+                        var cursoActualizado = curso.Object;
+                        cursoActualizado.Estado = true;
+
+                        await client.Child("Cursos").Child(curso.Key).PutAsync(cursoActualizado);
+                    }
+                }
             }
         }
+
+        public static async Task ActualizarEstudiantes()
+        {
+            FirebaseClient client = new FirebaseClient("https://registroestudiantes-5df1f-default-rtdb.firebaseio.com/");
+            var estudiantes = await client.Child("Estudiantes").OnceAsync<Estudiante>();
+
+            foreach (var estudiante in estudiantes)
+            {
+                if (estudiante.Object.Estado == null)
+                {
+                    var estudianteActualizado = estudiante.Object;
+                    estudianteActualizado.Estado = true;
+
+                    await client.Child("Estudiantes").Child(estudiante.Key).PutAsync(estudianteActualizado);
+                }
+            }
+        }        
     }
 }
